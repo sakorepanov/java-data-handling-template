@@ -29,30 +29,30 @@ public class SimpleBigNumbersService implements BigNumbersService {
      */
     @Override
     public BigInteger getPrimaryNumber(int range) {
-        ArrayList<BigInteger> itIsPrime = new ArrayList<>();
-        int lenOfArray = range;
-        while (itIsPrime.size() < range) {
-            lenOfArray = lenOfArray * 2;
-            itIsPrime.clear();
-            boolean[] prime = new boolean[lenOfArray + 1];
-            Arrays.fill(prime, true);
-            prime[0] = false;
-            prime[1] = false;
-            for (int i = 2; i * i <= lenOfArray; i++) {
-                if (prime[i]) {
-                    for (int j = i * i; j <= lenOfArray; j += i) {
-                        prime[j] = false;
+        ArrayList<BigInteger> arrayOfPrimeNums = new ArrayList<>();
+        int lengthOfArray = range;
+        while (arrayOfPrimeNums.size() < range) {
+            lengthOfArray = lengthOfArray * 2;
+            arrayOfPrimeNums.clear();
+            boolean[] isItPrime = new boolean[lengthOfArray + 1];
+            Arrays.fill(isItPrime, true);
+            isItPrime[0] = false;
+            isItPrime[1] = false;
+            for (int i = 2; i * i <= lengthOfArray; i++) {
+                if (isItPrime[i]) {
+                    for (int j = i * i; j <= lengthOfArray; j += i) {
+                        isItPrime[j] = false;
                     }
                 }
             }
-            for (int i = 0; i <= lenOfArray; i++) {
-                if (prime[i]) {
+            for (int i = 0; i <= lengthOfArray; i++) {
+                if (isItPrime[i]) {
                     BigInteger bigInteger = BigInteger.valueOf(i);
-                    itIsPrime.add(bigInteger);
+                    arrayOfPrimeNums.add(bigInteger);
                 }
             }
         }
 
-        return itIsPrime.get(range);
+        return arrayOfPrimeNums.get(range);
     }
 }

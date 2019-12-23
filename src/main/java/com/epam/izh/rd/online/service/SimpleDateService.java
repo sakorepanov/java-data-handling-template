@@ -49,9 +49,9 @@ public class SimpleDateService implements DateService {
      */
     @Override
     public long getNextLeapYear() {
-        for (long i = 2019; i <= 2023; i++) {
-            if (Year.isLeap(i)) {
-                return i;
+        for (long year = 2019; year <= 2023; year++) {
+            if (Year.isLeap(year)) {
+                return year;
             }
         }
         return 0;
