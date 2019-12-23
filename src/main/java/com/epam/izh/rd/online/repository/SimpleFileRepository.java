@@ -1,5 +1,8 @@
 package com.epam.izh.rd.online.repository;
 
+import java.io.*;
+import java.util.Scanner;
+
 public class SimpleFileRepository implements FileRepository {
 
     /**
@@ -10,6 +13,7 @@ public class SimpleFileRepository implements FileRepository {
      */
     @Override
     public long countFilesInDirectory(String path) {
+
         return 0;
     }
 
@@ -37,14 +41,15 @@ public class SimpleFileRepository implements FileRepository {
 
     /**
      * Метод создает файл на диске с расширением txt
-     *
-     * @param path путь до нового файла
+     *  @param path путь до нового файла
      * @param name имя файла
-     * @return был ли создан файл
+     * @return
      */
     @Override
-    public boolean createFile(String path, String name) {
-        return false;
+    public boolean createFile(String path, String name) throws IOException {
+       File file = new File(path + File.separator, name);
+       file.getParentFile().mkdirs();
+        file.createNewFile();
     }
 
     /**
@@ -55,6 +60,18 @@ public class SimpleFileRepository implements FileRepository {
      */
     @Override
     public String readFileFromResources(String fileName) {
+        try {
+            Scanner in = new Scanner(new FileReader(String.format("src/main/resources/%s", fileName)));
+            StringBuilder stringBuilder = new StringBuilder();
+            while (in.hasNext()) {
+                stringBuilder.append(in.next());
+            }
+            in.close();
+            String textFromFile = stringBuilder.toString();
+            return textFromFile;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

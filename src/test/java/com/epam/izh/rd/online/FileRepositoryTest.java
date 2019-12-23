@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,7 +49,7 @@ public class FileRepositoryTest {
 
     @Test
     @DisplayName("Тест метода FileRepository.createFile(String path)")
-    void testCreateFile() {
+    void testCreateFile() throws IOException {
         fileRepository.createFile(TEST_DIR_CREATE_PATH, TEST_FILE_TO_CREATE);
 
         assertTrue(getFile(TEST_DIR_CREATE_PATH + "/" + TEST_FILE_TO_CREATE).exists());
